@@ -69,8 +69,8 @@ function inputCls(hasError: boolean) {
   return `h-11 w-full rounded-xl border ${
     hasError
       ? 'border-red-500/70 focus:border-red-500 focus:ring-red-500/20'
-      : 'border-white/10 focus:border-amber-400 focus:ring-amber-400/20 dark:border-zinc-700/70 dark:focus:border-amber-400'
-  } bg-white/5 px-3 text-sm text-white placeholder:text-zinc-500 shadow-sm outline-none transition focus:ring-4 dark:bg-zinc-900/60`;
+      : 'border-zinc-300 focus:border-amber-400 focus:ring-amber-400/20 dark:border-zinc-700/70 dark:focus:border-amber-400'
+  } bg-white px-3 text-sm text-zinc-900 placeholder:text-zinc-400 shadow-sm outline-none transition focus:ring-4 dark:bg-zinc-900/60 dark:text-white dark:placeholder:text-zinc-500`;
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -207,7 +207,7 @@ export default function AuthPage() {
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
-    <main className="relative min-h-screen overflow-hidden bg-zinc-950">
+    <main className="relative min-h-screen overflow-hidden bg-zinc-100 dark:bg-zinc-950 transition-colors duration-300">
       {/* Background gradient blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl" />
@@ -231,22 +231,22 @@ export default function AuthPage() {
             <span className="inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amber-400">
               ACIS Platform
             </span>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-4xl">
               {mode === 'login' ? t('loginTitle') : t('registerTitle')}
             </h1>
-            <p className="mt-2 text-sm text-zinc-400">
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
               {mode === 'login' ? t('loginSubtitle') : t('registerSubtitle')}
             </p>
           </div>
 
           <div className="mx-auto grid w-full max-w-4xl gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-start">
             {/* Left panel — features */}
-            <aside className="hidden rounded-2xl border border-white/8 bg-white/5 p-6 backdrop-blur-sm lg:block">
+            <aside className="hidden rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-white/8 dark:bg-white/5 dark:backdrop-blur-sm lg:block">
               <div className="mb-6 flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/20">
                   <span className="text-base">💹</span>
                 </div>
-                <span className="font-semibold text-white">ACIS Finance</span>
+                <span className="font-semibold text-zinc-900 dark:text-white">ACIS Finance</span>
               </div>
 
               <ul className="space-y-4">
@@ -258,10 +258,10 @@ export default function AuthPage() {
                   ] as const
                 ).map(({ icon, key }) => (
                   <li key={key} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-800 text-sm">
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-sm dark:bg-zinc-800">
                       {icon}
                     </span>
-                    <span className="text-sm leading-snug text-zinc-300">
+                    <span className="text-sm leading-snug text-zinc-600 dark:text-zinc-300">
                       {t(key)}
                     </span>
                   </li>
@@ -286,9 +286,9 @@ export default function AuthPage() {
             </aside>
 
             {/* Right panel — form */}
-            <div className="rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-2xl backdrop-blur-sm sm:p-7">
+            <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-white/10 dark:bg-zinc-900/80 dark:backdrop-blur-sm sm:p-7">
               {/* Mode tabs */}
-              <div className="mb-6 grid grid-cols-2 rounded-xl border border-zinc-700/60 bg-zinc-800/60 p-1">
+              <div className="mb-6 grid grid-cols-2 rounded-xl border border-zinc-200 bg-zinc-100 p-1 dark:border-zinc-700/60 dark:bg-zinc-800/60">
                 {(['login', 'register'] as const).map((m) => (
                   <button
                     key={m}
@@ -297,7 +297,7 @@ export default function AuthPage() {
                     className={`h-9 rounded-lg text-sm font-medium transition ${
                       mode === m
                         ? 'bg-amber-500 text-zinc-900 shadow'
-                        : 'text-zinc-400 hover:text-zinc-200'
+                        : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
                     }`}
                   >
                     {m === 'login' ? t('login') : t('register')}
@@ -309,7 +309,7 @@ export default function AuthPage() {
               {mode === 'login' && (
                 <form onSubmit={handleLoginSubmit(onLoginSubmit)} className="space-y-4" noValidate>
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-zinc-300">
+                    <label className="mb-1.5 block text-xs font-medium text-zinc-600 dark:text-zinc-300">
                       {t('email')}
                     </label>
                     <input
@@ -322,7 +322,7 @@ export default function AuthPage() {
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-zinc-300">
+                    <label className="mb-1.5 block text-xs font-medium text-zinc-600 dark:text-zinc-300">
                       {t('password')}
                     </label>
                     <input
