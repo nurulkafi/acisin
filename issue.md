@@ -1,54 +1,42 @@
-# Rencana Pengembangan Fitur Aplikasi
+# Panduan Tugas: Revisi Frontend (Keuangan & Investasi)
 
-Dokumen ini berisi spesifikasi fitur, skema database, dan alur aplikasi yang akan dikembangkan.
+Dokumen ini ditujukan kepada **Junior Programmer** dan **AI Agent** sebagai acuan utama dalam melakukan pengembangan dan revisi pada antarmuka pengguna (UI) aplikasi. 
 
-## 1. Daftar Fitur Utama
+Aplikasi ini bertemakan **Keuangan dan Investasi (Finance & Investment)**. Seluruh hasil desain dan implementasi harus mencerminkan kesan profesional, modern, elegan, dan premium.
 
-- **Autentikasi**: Login, Register, dan Logout.
-- **Dashboard**: Halaman dashboard dinamis berdasarkan *role* pengguna (Admin vs Customer).
-- **Profile**: Halaman untuk melihat dan mengelola profil pengguna.
+---
 
-## 2. Skema Database (Supabase)
+## 1. Revisi Halaman Login dan Register
 
-### Tabel `users`
-Tabel utama untuk menyimpan data autentikasi dan informasi dasar pengguna.
-- `id` (uuid, primary key)
-- `full_name` (varchar)
-- `email` (varchar)
-- `password` (varchar) - *Catatan: Jika menggunakan Supabase Auth, password akan di-handle oleh auth.users, namun field ini disiapkan jika menggunakan custom auth.*
-- `role` (varchar) - Contoh: `admin`, `customer`. Default saat register: `customer`.
-- `created_at` (timestamp)
-- `updated_at` (timestamp)
-- `is_active` (boolean, default: `true`)
+Silakan lakukan perombakan pada halaman Login dan Register dengan spesifikasi berikut:
 
-### Tabel `profiles`
-Tabel relasi untuk menyimpan data detail pengguna.
-- `id` (uuid, primary key)
-- `user_id` (uuid, foreign key ke `users.id`)
-- `phone` (varchar)
-- `address` (varchar)
-- `avatar_url` (varchar) - Link ke file di Supabase Storage.
-- `created_at` (timestamp)
-- `updated_at` (timestamp)
+*   **Desain Modern & Tematik**: Rancang antarmuka yang modern dan premium sesuai dengan tema keuangan/investasi. Gunakan prinsip desain terkini (seperti perpaduan warna yang solid, tipografi yang rapi, atau efek *glassmorphism* jika sesuai).
+*   **Mode Tema (Dark/Light Mode)**: 
+    *   Tambahkan tombol *toggle* untuk beralih antara tema gelap dan terang.
+    *   **Penting**: Atur agar **Tema Gelap (Dark Mode) aktif secara default** saat pengguna pertama kali membuka halaman.
+*   **Lokalisasi Bahasa (ID/EN)**:
+    *   Tambahkan *toggle* pilihan bahasa (Bahasa Indonesia dan Bahasa Inggris).
+    *   **Penting**: Gunakan **Bahasa Indonesia sebagai bahasa default**.
+*   **Validasi Form**: 
+    *   Implementasikan validasi *client-side* yang kuat dan ramah pengguna pada form login maupun register.
+    *   Berikan pesan *error* yang jelas jika input tidak sesuai (misal: format email salah, password kurang kuat) untuk mempermudah proses masuk dan pendaftaran user.
 
-## 3. Alur Aplikasi (Flow)
+---
 
-### Register (Pendaftaran)
-Pendaftaran pengguna baru dengan ketentuan:
-- *Role* default yang diberikan adalah **`customer`**.
-- Form pendaftaran mencakup input berikut:
-  1. Nama Lengkap (`full_name`)
-  2. Email (`email`)
-  3. Password (`password`)
-  4. Konfirmasi Password
-  5. Nomor Telepon (`phone`)
-  6. Alamat (`address`)
-  7. Upload Foto Profile (File akan diunggah ke Supabase Storage, dan URL-nya disimpan di `avatar_url`).
+## 2. Revisi Halaman Dashboard (Admin dan Customer)
 
-### Login & Redirect
-- Setelah berhasil login, sistem akan mengecek `role` pengguna.
-- **Admin**: Akan di-redirect ke halaman **Dashboard Admin** yang memiliki fitur dan akses data yang lebih lengkap.
-- **Customer**: Akan di-redirect ke halaman **Dashboard Customer** dengan tampilan dan akses yang disesuaikan untuk pelanggan.
+Silakan lakukan persiapan dan perombakan struktur dasar untuk halaman Dashboard, baik untuk *role* Admin maupun Customer:
 
-### Logout
-- Fitur untuk mengakhiri sesi pengguna dan mengembalikan ke halaman login atau halaman utama.
+*   **Pengosongan Konten Utama**: 
+    *   Kosongkan isi/konten utama dari halaman dashboard admin dan customer yang ada saat ini. Halaman akan dirancang bangun ulang dari awal.
+*   **Desain Layout Modern**: 
+    *   Buat kerangka (*layout*) dashboard yang modern, rapi, dan sesuai dengan estetika aplikasi keuangan.
+*   **Mode Tema (Dark/Light Mode)**:
+    *   Pastikan *toggle* tema gelap/terang juga tersedia dan berfungsi di halaman dashboard.
+    *   **Penting**: Sama seperti halaman autentikasi, gunakan **Tema Gelap (Dark Mode) secara default**.
+*   **Lokalisasi Bahasa (ID/EN)**:
+    *   Pastikan *toggle* bahasa tersedia di header/navigasi dashboard.
+    *   **Penting**: Gunakan **Bahasa Indonesia sebagai bahasa default**.
+*   **Navigasi Sidebar**:
+    *   Bangun komponen navigasi *sidebar* untuk Admin dan Customer.
+    *   Untuk tahap awal ini, cukup tambahkan satu menu navigasi saja, yaitu: **"Dashboard"**.
